@@ -1,0 +1,61 @@
+public class Silah {
+    private Şarjör şarjör;
+    private int etkinMenzil;
+
+    public Silah(int etkinMenzil) {
+        if(etkinMenzil>0) this.etkinMenzil = etkinMenzil;
+        else this.etkinMenzil=1;
+    }
+    public void atesEt(int hedefMenzili){
+        if(hedefMenzili<0){
+            System.out.println("Hedef menzili 0 dan küçük olamaz.");
+        } else if(this.şarjör !=null) {
+            if(this.şarjör.mermiAtesle()) {
+                if (etkinMenzil >= hedefMenzili) {
+                    System.out.println(hedefMenzili + " uzaklıktaki hedefi vurdunuz. Kalan mermi: " + this.şarjör.getMevcutmermi());
+
+                } else {
+                    System.out.println("Silahın etki menzili hedefe olan uzaklıktan az olduğu için hedefi vuramadınız. Kalan mermi: " +
+                            this.şarjör.getMevcutmermi());
+
+                }
+            }
+        } else System.out.println("Silaha takılı şarjör yok.");
+    }
+    public void silahıDoldur(){
+        if(this.şarjör != null) {
+            this.şarjör.şarjörDoldur();
+        } else System.out.println("Silaha takılı bir şarjör yok. Silaha şarjör takın.");
+    }
+
+
+
+    public void şarjörTak(Şarjör şarjör){
+        if(this.şarjör != null){
+            System.out.println("Silaha takılı bir şarjör mevcut");
+        } else {
+            this.şarjör = şarjör;
+            System.out.println("Şarjör silaha başarılı bir şekilde takıldı");
+        }
+    }
+
+
+
+    public void şarjörüÇıkar() {
+        if(this.şarjör == null){
+            System.out.println("Silaha takılı şarjör yok.");
+        } else {
+            System.out.println("Şarjör çıkarıldı.");
+            this.şarjör = null;
+        }
+    }
+
+    public int getEtkinMenzil() {
+        return etkinMenzil;
+    }
+
+    public void setEtkinMenzil(int etkinMenzil) {
+        if(etkinMenzil>0) this.etkinMenzil = etkinMenzil;
+        else this.etkinMenzil=1;
+    }
+}
