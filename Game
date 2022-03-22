@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class Game {
+    Scanner scan = new Scanner(System.in);
+    int hedefMenzili;
+    int mecvutmermi;
+    int kapasite;
+    int etkinMenzil;
+    int secim;
+    public void start() {
+        do {
+            System.out.println("Şarjörün kapasitesini giriniz.");
+            kapasite = scan.nextInt();
+            if (kapasite <= 0) {
+                System.out.println("Hatalı giris yaptınız.");
+            }
+        } while (kapasite <= 0);
+        do {
+            System.out.println("Şarjörde bulunan mermi sayısını giriniz.");
+            mecvutmermi = scan.nextInt();
+            if (mecvutmermi > kapasite || mecvutmermi < 0) {
+                System.out.println("Mevcut mermi sayısı 0 dan küçük veya şarjör kapasitesinden büyük olamaz.");
+            }
+        } while (mecvutmermi > kapasite || mecvutmermi < 0);
+        Şarjör şarjör1 = new Şarjör(kapasite, mecvutmermi);
+        do {
+            System.out.println("Silahın etkin menzilini giriniz.");
+            etkinMenzil = scan.nextInt();
+            if (etkinMenzil <= 0) {
+                System.out.println("Silahın etkin menzili 0 veya 0 dan küçük olamaz.");
+            }
+        } while (etkinMenzil <= 0);
+        Silah silah1 = new Silah(etkinMenzil);
+
+        do {
+            System.out.println("Yapacağınız işlemi seçiniz.\n" +
+                    "1-Silaha şarjör tak\n" +
+                    "2-Şarjörü silahtan çıkar\n" +
+                    "3-Silahı doldur\n" +
+                    "4-Şarjörü doldur\n" +
+                    "5-Ateş et\n" +
+                    "6-Çıkış yap");
+            secim = scan.nextInt();
+            if (secim < 1 || secim > 6) {
+                System.out.println("Belirtilen aralıkta bir değer giriniz");
+            } else islemler(silah1,şarjör1,secim);
+        } while (secim != 6);
+    }
+
+
+
+
+
+    public void islemler(Silah silah1, Şarjör şarjör1, int secim){
+            switch (secim){
+                case(1): silah1.şarjörTak(şarjör1);
+                break;
+                case(2): silah1.şarjörüÇıkar();
+                break;
+                case(3): silah1.silahıDoldur();
+                break;
+                case(4): şarjör1.şarjörDoldur();
+                break;
+                case(5): System.out.println("Hedefe olan uzaklığı giriniz.");
+                        hedefMenzili = scan.nextInt();
+                        silah1.atesEt(hedefMenzili);
+                        break;
+                case(6): System.out.println("Program sonlandırıldı.");
+                break;
+            }
+
+    }
+}
